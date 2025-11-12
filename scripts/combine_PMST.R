@@ -36,7 +36,7 @@ pmst_repos <- pmst_repos[! pmst_repos %in% "PMST-Database/PMST-Supplementary-Mat
 pmst_langs <- get_pmst_langs()
 pmst_langs <- pmst_langs[! pmst_langs %in% "pmst-supplementary-materials"]
 
-# read the forms file from each repo and combine into one dataframe
+# read the forms file from each repo and combine into one dataframe (can be repeated for any of the data files)
 get_forms <- function(repos) {
   forms_list <- map(repos, function(f) {
     forms_url <- paste0("https://raw.githubusercontent.com/", f, "/main/", pmst_langs, "_forms.csv")
@@ -50,7 +50,8 @@ get_forms <- function(repos) {
 
 # apply the function
 forms_dataframe <- get_forms(pmst_repos)
+glimpse(forms_dataframe)
 
 # write to Supplementary Materials folder (adjust with your own filepath)
-
+write_csv(forms_dataframe, "/Users/auderset/Documents/GitHub/PMST-Supplementary-Materials/all_forms.csv")
 
